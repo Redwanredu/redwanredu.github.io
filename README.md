@@ -1,6 +1,6 @@
 # redwanislam.github.io
 my portfolio
-Live URL: https://redwanislam.github.io
+Live URL: https://redwanredu.github.io
 
 Contact
 
