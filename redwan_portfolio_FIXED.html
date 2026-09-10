@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Redwan Islam – Automotive Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ── TOKENS ── */
+:root{
+  --ink:    #0F1C2E;
+  --ink2:   #162436;
+  --cyan:   #00C2CB;
+  --cyan2:  #00E5EF;
+  --slate:  #1E3A52;
+  --mist:   #F0F4F8;
+  --dim:    #8A9BB0;
+  --white:  #FFFFFF;
+  --rule:   rgba(0,194,203,.18);
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--ink);color:var(--mist);font-family:var(--font-body);line-height:1.6;overflow-x:hidden}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:3px}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.9rem 5vw;
+  background:rgba(15,28,46,.85);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule);
+  transition:padding .3s;
+}
+.nav-logo{
+  font-family:var(--font-head);font-weight:700;font-size:1.1rem;
+  color:var(--white);letter-spacing:-.02em;
+}
+.nav-logo span{color:var(--cyan)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  font-family:var(--font-body);font-size:.85rem;font-weight:500;
+  color:var(--dim);text-decoration:none;letter-spacing:.02em;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{
+  background:var(--cyan);color:var(--ink);
+  font-family:var(--font-head);font-size:.82rem;font-weight:700;
+  padding:.45rem 1.1rem;border-radius:4px;text-decoration:none;
+  transition:background .2s,transform .15s;
+  white-space:nowrap;
+}
+.nav-cta:hover{background:var(--cyan2);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.25rem}
+.hamburger span{display:block;width:22px;height:2px;background:var(--dim);border-radius:2px;transition:all .3s}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:8rem 5vw 5rem;position:relative;overflow:hidden;
+}
+#hero-canvas{position:absolute;inset:0;opacity:.18}
+
+.hero-inner{position:relative;z-index:2;max-width:820px}
+.hero-tag{
+  display:inline-block;
+  font-family:var(--font-body);font-size:.78rem;font-weight:500;
+  color:var(--cyan);letter-spacing:.12em;
+  border:1px solid var(--rule);
+  padding:.3rem .8rem;border-radius:3px;margin-bottom:1.5rem;
+}
+.hero-name{
+  font-family:var(--font-head);font-size:clamp(2.8rem,7vw,5.5rem);
+  font-weight:700;color:var(--white);line-height:1.05;
+  letter-spacing:-.03em;margin-bottom:.75rem;
+}
+.hero-name .cursor{
+  display:inline-block;width:3px;height:.9em;background:var(--cyan);
+  margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.hero-sub{
+  font-family:var(--font-head);font-size:clamp(1.1rem,2.5vw,1.55rem);
+  font-weight:300;color:var(--cyan);letter-spacing:.01em;margin-bottom:1.5rem;
+}
+.hero-desc{
+  font-size:1rem;color:var(--dim);line-height:1.75;
+  max-width:58ch;margin-bottom:2.5rem;
+}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  background:var(--cyan);color:var(--ink);
+  font-family:var(--font-head);font-size:.9rem;font-weight:700;
+  padding:.7rem 1.75rem;border-radius:4px;text-decoration:none;
+  transition:background .2s,transform .15s;
+  border:none;cursor:pointer;
+}
+.btn-primary:hover{background:var(--cyan2);transform:translateY(-2px)}
+.btn-ghost{
+  background:transparent;color:var(--mist);
+  font-family:var(--font-head);font-size:.9rem;font-weight:500;
+  padding:.7rem 1.75rem;border-radius:4px;text-decoration:none;
+  border:1px solid rgba(240,244,248,.25);transition:border-color .2s,color .2s;
+}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+.hero-scroll{
+  position:absolute;bottom:2.5rem;left:5vw;
+  display:flex;align-items:center;gap:.75rem;
+  font-size:.75rem;color:var(--dim);letter-spacing:.1em;
+}
+.scroll-line{width:40px;height:1px;background:var(--dim)}
+
+/* ── SECTIONS ── */
+section{padding:6rem 5vw}
+.section-label{
+  font-family:var(--font-body);font-size:.78rem;font-weight:500;
+  color:var(--cyan);letter-spacing:.1em;margin-bottom:.6rem;
+}
+.section-title{
+  font-family:var(--font-head);font-size:clamp(1.8rem,4vw,2.6rem);
+  font-weight:700;color:var(--white);letter-spacing:-.025em;
+  line-height:1.1;margin-bottom:1rem;
+}
+.section-rule{
+  width:48px;height:2px;background:var(--cyan);border-radius:2px;margin-bottom:3rem;
+}
+.section-intro{
+  font-size:.95rem;color:var(--dim);line-height:1.75;max-width:60ch;margin-bottom:3rem;
+}
+
+/* ── ABOUT ── */
+#about{background:var(--ink2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-text p{font-size:.95rem;color:var(--dim);line-height:1.8;margin-bottom:1.1rem}
+.about-text p strong{color:var(--mist);font-weight:500}
+.about-facts{display:flex;flex-direction:column;gap:1.25rem}
+.fact{
+  border-left:2px solid var(--rule);padding-left:1.25rem;
+}
+.fact-val{
+  font-family:var(--font-head);font-size:1.9rem;font-weight:700;
+  color:var(--cyan);line-height:1;margin-bottom:.2rem;
+}
+.fact-label{font-size:.8rem;color:var(--dim)}
+
+/* ── SKILLS ── */
+#skills{background:var(--ink)}
+.skills-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
+.skill-card{
+  background:var(--ink2);border:1px solid var(--rule);
+  border-radius:6px;padding:1.5rem;
+  transition:border-color .2s,transform .2s;
+}
+.skill-card:hover{border-color:var(--cyan);transform:translateY(-3px)}
+.skill-card-icon{font-size:1.6rem;margin-bottom:.75rem}
+.skill-card-title{
+  font-family:var(--font-head);font-size:.9rem;font-weight:600;
+  color:var(--white);margin-bottom:.75rem;
+}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.stag{
+  font-size:.73rem;font-weight:500;
+  background:rgba(0,194,203,.1);color:var(--cyan);
+  border:1px solid rgba(0,194,203,.2);
+  padding:.2rem .55rem;border-radius:3px;
+}
+
+/* ── EXPERIENCE / EDUCATION TIMELINE ── */
+#experience{background:var(--ink2)}
+#education{background:var(--ink)}
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{
+  content:'';position:absolute;left:0;top:.5rem;bottom:0;
+  width:1px;background:var(--rule);
+}
+.tl-item{position:relative;margin-bottom:3rem}
+.tl-dot{
+  position:absolute;left:-2.35rem;top:.35rem;
+  width:11px;height:11px;border-radius:50%;
+  background:var(--ink);border:2px solid var(--cyan);
+}
+.tl-period{
+  font-size:.75rem;font-weight:500;color:var(--cyan);
+  letter-spacing:.06em;margin-bottom:.35rem;
+}
+.tl-title{
+  font-family:var(--font-head);font-size:1.05rem;font-weight:600;
+  color:var(--white);margin-bottom:.2rem;line-height:1.3;
+}
+.tl-org{font-size:.85rem;color:var(--dim);margin-bottom:.6rem}
+.tl-desc{font-size:.85rem;color:var(--dim);line-height:1.7}
+.tl-desc li{list-style:none;padding-left:.9rem;position:relative;margin-bottom:.3rem}
+.tl-desc li::before{content:"–";position:absolute;left:0;color:var(--cyan)}
+.tl-badge{
+  display:inline-block;font-size:.7rem;font-weight:600;
+  background:rgba(0,194,203,.12);color:var(--cyan);
+  border:1px solid rgba(0,194,203,.2);
+  padding:.15rem .5rem;border-radius:3px;margin-top:.5rem;
+}
+
+/* ── VOLUNTEERING ── */
+#volunteering{background:var(--ink2)}
+.vol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem}
+.vol-card{
+  background:var(--ink);border:1px solid var(--rule);
+  border-radius:6px;padding:1.5rem;
+}
+.vol-title{
+  font-family:var(--font-head);font-size:.95rem;font-weight:600;
+  color:var(--white);margin-bottom:.25rem;
+}
+.vol-org{font-size:.8rem;color:var(--cyan);margin-bottom:.5rem}
+.vol-period{font-size:.75rem;color:var(--dim);margin-bottom:.6rem}
+.vol-desc{font-size:.82rem;color:var(--dim);line-height:1.65}
+
+/* ── LANGUAGES ── */
+#languages{background:var(--ink)}
+.lang-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:700px}
+.lang-item{margin-bottom:.25rem}
+.lang-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.4rem}
+.lang-name{font-family:var(--font-head);font-size:.95rem;font-weight:600;color:var(--white)}
+.lang-level{font-size:.75rem;color:var(--dim)}
+.lang-bar{height:4px;background:rgba(138,155,176,.2);border-radius:4px;overflow:hidden}
+.lang-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--cyan),var(--cyan2));transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.lang-note{font-size:.75rem;color:var(--dim);margin-top:.5rem}
+
+/* ── CONTACT ── */
+#contact{
+  background:var(--ink2);
+  text-align:center;padding:7rem 5vw;
+}
+#contact .section-rule{margin-left:auto;margin-right:auto}
+.contact-sub{
+  font-size:1rem;color:var(--dim);max-width:46ch;
+  margin:0 auto 2.5rem;line-height:1.75;
+}
+.contact-links{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:1.25rem;margin-bottom:3.5rem;
+}
+.contact-link{
+  display:flex;align-items:center;gap:.6rem;
+  font-size:.88rem;color:var(--dim);text-decoration:none;
+  padding:.6rem 1.2rem;border:1px solid var(--rule);border-radius:4px;
+  transition:color .2s,border-color .2s;
+}
+.contact-link:hover{color:var(--cyan);border-color:var(--cyan)}
+.contact-link svg{width:16px;height:16px;fill:currentColor}
+.contact-email-big{
+  font-family:var(--font-head);font-size:clamp(1.1rem,3vw,1.8rem);
+  font-weight:600;color:var(--white);text-decoration:none;
+  border-bottom:2px solid var(--cyan);padding-bottom:.2rem;
+  transition:color .2s;
+}
+.contact-email-big:hover{color:var(--cyan)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);
+  border-top:1px solid var(--rule);
+  padding:1.5rem 5vw;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.78rem;color:var(--dim);flex-wrap:wrap;gap:.5rem;
+}
+
+/* ── MOBILE NAV ── */
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .nav-links{
+    display:none;flex-direction:column;gap:0;
+    position:absolute;top:100%;left:0;right:0;
+    background:rgba(15,28,46,.98);border-bottom:1px solid var(--rule);
+    padding:1rem 5vw;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:.65rem 0;border-bottom:1px solid var(--rule);display:block}
+  .nav-links li:last-child a{border-bottom:none}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem}
+  section{padding:4rem 5vw}
+}
+@media(max-width:480px){
+  .hero-actions{flex-direction:column}
+  .btn-primary,.btn-ghost{text-align:center}
+}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ===== PROFESSIONAL 3D ENHANCEMENTS ===== */
+:root{--glass:rgba(255,255,255,.045);--shadow:0 25px 70px rgba(0,0,0,.35)}
+body{background:radial-gradient(circle at 80% 10%,rgba(0,194,203,.10),transparent 28%),var(--ink)}
+#hero{perspective:1200px}
+#hero::before{content:"";position:absolute;width:520px;height:520px;right:-170px;top:10%;border-radius:50%;background:radial-gradient(circle,rgba(0,229,239,.18),rgba(0,194,203,.04) 45%,transparent 70%);filter:blur(2px);animation:orbFloat 8s ease-in-out infinite;pointer-events:none}
+.hero-inner{transform-style:preserve-3d;animation:heroIn .9s ease both}
+.hero-tag,.hero-name,.hero-sub,.hero-desc,.hero-actions{transform:translateZ(28px)}
+.hero-name{text-shadow:0 8px 35px rgba(0,194,203,.14)}
+.hero-visual{position:absolute;right:7vw;top:50%;width:360px;height:360px;transform:translateY(-50%);transform-style:preserve-3d;z-index:1;pointer-events:none}
+.orbit{position:absolute;inset:35px;border:1px solid rgba(0,229,239,.22);border-radius:50%;transform:rotateX(68deg) rotateZ(15deg);animation:spin 14s linear infinite}
+.orbit.two{inset:62px;transform:rotateY(70deg) rotateZ(-20deg);animation-duration:10s;animation-direction:reverse}
+.core{position:absolute;left:50%;top:50%;width:145px;height:145px;transform:translate(-50%,-50%) rotateX(55deg) rotateY(25deg);transform-style:preserve-3d;animation:coreFloat 5s ease-in-out infinite}
+.core-face{position:absolute;inset:0;border:1px solid rgba(0,229,239,.4);background:linear-gradient(145deg,rgba(0,229,239,.18),rgba(15,28,46,.15));backdrop-filter:blur(8px);box-shadow:inset 0 0 35px rgba(0,229,239,.08),0 20px 60px rgba(0,0,0,.35);border-radius:28px}
+.core-face::before{content:"AUTO\A SOFTWARE";white-space:pre;display:grid;place-items:center;height:100%;font-family:var(--font-head);font-size:12px;line-height:1.5;letter-spacing:.2em;color:var(--cyan);text-align:center}
+.card-3d{transform-style:preserve-3d;transition:transform .15s ease,box-shadow .25s ease;border-color:rgba(0,194,203,.2)!important;box-shadow:0 12px 35px rgba(0,0,0,.12)}
+.card-3d:hover{box-shadow:0 25px 55px rgba(0,0,0,.3),0 0 30px rgba(0,194,203,.08)}
+.skill-card-icon{transform:translateZ(22px)}
+.skill-card-title,.skill-tags{transform:translateZ(12px)}
+.tl-item{padding:1.25rem 1.35rem;border:1px solid transparent;border-radius:12px;transition:background .25s,border-color .25s,transform .25s}
+.tl-item:hover{background:rgba(0,194,203,.035);border-color:rgba(0,194,203,.13);transform:translateX(5px)}
+.fact{padding:1rem 1.25rem;border:1px solid rgba(0,194,203,.1);border-left:2px solid var(--cyan);border-radius:10px;background:linear-gradient(120deg,rgba(255,255,255,.025),transparent);transition:transform .25s,box-shadow .25s}
+.fact:hover{transform:translateY(-4px) translateX(4px);box-shadow:var(--shadow)}
+.vol-card{transition:transform .25s,box-shadow .25s,border-color .25s;transform-style:preserve-3d}
+.vol-card:hover{transform:translateY(-7px) rotateX(2deg);box-shadow:var(--shadow);border-color:rgba(0,194,203,.35)}
+.contact-link{background:rgba(255,255,255,.015);box-shadow:0 8px 25px rgba(0,0,0,.08)}
+.btn-primary{box-shadow:0 8px 25px rgba(0,194,203,.18)}
+#backTop{position:fixed;right:24px;bottom:24px;width:42px;height:42px;border:1px solid var(--rule);border-radius:50%;background:rgba(15,28,46,.8);color:var(--cyan);display:grid;place-items:center;opacity:0;pointer-events:none;transition:.25s;z-index:90;cursor:pointer;backdrop-filter:blur(10px)}
+#backTop.show{opacity:1;pointer-events:auto}
+#progress{position:fixed;left:0;top:0;height:2px;width:0;background:linear-gradient(90deg,var(--cyan),var(--cyan2));z-index:999;box-shadow:0 0 12px rgba(0,229,239,.55)}
+@keyframes spin{to{transform:rotateX(68deg) rotateZ(375deg)}}
+@keyframes coreFloat{0%,100%{transform:translate(-50%,-50%) rotateX(55deg) rotateY(25deg) translateY(0)}50%{transform:translate(-50%,-50%) rotateX(55deg) rotateY(205deg) translateY(-16px)}}
+@keyframes orbFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-25px,25px,0)}}
+@keyframes heroIn{from{opacity:0;transform:translateY(18px) rotateX(3deg)}to{opacity:1;transform:none}}
+@media(max-width:900px){.hero-visual{right:-120px;opacity:.35}.hero-inner{max-width:720px}}
+@media(max-width:600px){.hero-visual{width:260px;height:260px;right:-115px;top:42%;opacity:.2}#backTop{right:14px;bottom:14px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+
+</style>
+</head>
+<body>
+<noscript><div style="position:fixed;top:0;left:0;right:0;z-index:99999;padding:10px;text-align:center;background:#00c2cb;color:#0f1c2e;font:600 14px Arial">JavaScript is disabled. The portfolio still works, but interactive animations are unavailable.</div></noscript>
+
+<div id="progress"></div>
+<button id="backTop" aria-label="Back to top">↑</button>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Redwan<span>.</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#volunteering">Volunteering</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:redwanredu110@gmail.com" class="btn-primary nav-cta">Get in Touch</a>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-visual" aria-hidden="true"><div class="orbit"></div><div class="orbit two"></div><div class="core"><div class="core-face"></div></div></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Available for Internship · Chemnitz, Germany</div>
+    <h1 class="hero-name" id="hero-name"><span class="cursor" id="cursor"></span></h1>
+    <p class="hero-sub">MSc Automotive Software Engineering</p>
+    <p class="hero-desc">
+      Master's student at TU Chemnitz building at the intersection of software, embedded systems, and automotive technology.
+      Passionate about clean code, real-world engineering, and making complex systems work.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Let's Connect</a>
+      <a href="#experience" class="btn-ghost">View My Work</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll to explore
+  </div>
+</section>
+
+<!-- CURRENT FOCUS -->
+<section class="focus-strip" style="padding:1.6rem 5vw;background:#0b1726;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+  <div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;font-size:.78rem;color:var(--dim);letter-spacing:.05em;text-align:center">
+    <span>◈ AUTOMOTIVE SOFTWARE</span><span>◈ EMBEDDED SYSTEMS</span><span>◈ SOFTWARE ENGINEERING</span><span>◈ MACHINE LEARNING</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">Who I am</div>
+    <h2 class="section-title">A bit about me</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm <strong>Redwan Islam</strong>, a Bangladeshi engineer currently pursuing my Master's in <strong>Automotive Software Engineering</strong> at Chemnitz University of Technology in Germany.</p>
+      <p>My background spans software development, web technologies, and embedded systems. I enjoy working across the stack — from writing JavaScript for interactive interfaces to thinking about real-time system constraints in automotive contexts.</p>
+      <p>Before moving to Germany, I spent two years as a <strong>Computer Science teacher</strong> in Dhaka, where I learned that explaining something clearly is just as important as building it correctly.</p>
+      <p>I'm currently looking for a <strong>student internship or working student position</strong> where I can contribute meaningfully and keep growing.</p>
+    </div>
+    <div class="about-facts reveal">
+      <div class="fact">
+        <div class="fact-val">3.61<span style="font-size:1rem;font-weight:300;color:var(--dim)">/4.00</span></div>
+        <div class="fact-label">BSc GPA — Eastern University</div>
+      </div>
+      <div class="fact">
+        <div class="fact-val">2+</div>
+        <div class="fact-label">Years professional experience (teaching)</div>
+      </div>
+      <div class="fact">
+        <div class="fact-val">3</div>
+        <div class="fact-label">Languages spoken</div>
+      </div>
+      <div class="fact">
+        <div class="fact-val">TUC</div>
+        <div class="fact-label">Currently at Chemnitz University of Technology</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <div class="section-label">What I work with</div>
+    <h2 class="section-title">Skills & Technologies</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="skills-wrap">
+    <div class="skill-card card-3d reveal">
+      <div class="skill-card-icon">💻</div>
+      <div class="skill-card-title">Programming</div>
+      <div class="skill-tags">
+        <span class="stag">JavaScript</span>
+        <span class="stag">Java</span>
+        <span class="stag">Python</span>
+        <span class="stag">HTML5</span>
+        <span class="stag">CSS3</span>
+      </div>
+    </div>
+    <div class="skill-card card-3d reveal">
+      <div class="skill-card-icon">🌐</div>
+      <div class="skill-card-title">Web Development</div>
+      <div class="skill-tags">
+        <span class="stag">Responsive Design</span>
+        <span class="stag">REST APIs</span>
+        <span class="stag">Node.js</span>
+        <span class="stag">CMS</span>
+      </div>
+    </div>
+    <div class="skill-card card-3d reveal">
+      <div class="skill-card-icon">🚗</div>
+      <div class="skill-card-title">Automotive & Embedded</div>
+      <div class="skill-tags">
+        <span class="stag">AUTOSAR</span>
+        <span class="stag">Real-time Systems</span>
+        <span class="stag">Embedded C</span>
+        <span class="stag">ASPICE</span>
+      </div>
+    </div>
+    <div class="skill-card card-3d reveal">
+      <div class="skill-card-icon">🧠</div>
+      <div class="skill-card-title">Machine Learning</div>
+      <div class="skill-tags">
+        <span class="stag">scikit-learn</span>
+        <span class="stag">NumPy</span>
+        <span class="stag">Supervised Learning</span>
+        <span class="stag">Data Analysis</span>
+      </div>
+    </div>
+    <div class="skill-card card-3d reveal">
+      <div class="skill-card-icon">🎨</div>
+      <div class="skill-card-title">Design & 3D</div>
+      <div class="skill-tags">
+        <span class="stag">Blender</span>
+        <span class="stag">3D Modelling</span>
+        <span class="stag">Adobe Photoshop</span>
+        <span class="stag">Video Editing</span>
+      </div>
+    </div>
+    <div class="skill-card card-3d reveal">
+      <div class="skill-card-icon">🛠</div>
+      <div class="skill-card-title">Tools</div>
+      <div class="skill-tags">
+        <span class="stag">Git</span>
+        <span class="stag">Microsoft Office</span>
+        <span class="stag">Google Workspace</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">Work history</div>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Feb 2021 — May 2023</div>
+      <div class="tl-title">Computer Science Teacher</div>
+      <div class="tl-org">Bhasha Prodeep High School · Dhaka, Bangladesh</div>
+      <ul class="tl-desc">
+        <li>Taught programming fundamentals, office productivity, and digital literacy to secondary school students.</li>
+        <li>Designed lesson plans and assessments; managed a 30-seat computer lab.</li>
+        <li>Developed curriculum materials that improved student engagement and pass rates.</li>
+      </ul>
+      <span class="tl-badge">Teaching · Curriculum Design · Lab Management</span>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Jan 2018 — Jan 2019</div>
+      <div class="tl-title">Executive Member</div>
+      <div class="tl-org">Eastern University Engineering Club · Dhaka</div>
+      <ul class="tl-desc">
+        <li>Organized technical workshops, seminars, and inter-university competitions.</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Jan 2017 — Jan 2018</div>
+      <div class="tl-title">Joint Secretary</div>
+      <div class="tl-org">Eastern University Computing Club · Dhaka</div>
+      <ul class="tl-desc">
+        <li>Coordinated events and mentored junior members in programming competitions.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <div class="section-label">Academic background</div>
+    <h2 class="section-title">Education</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Apr 2023 — Present</div>
+      <div class="tl-title">MSc — Automotive Software Engineering</div>
+      <div class="tl-org">Chemnitz University of Technology · Chemnitz, Germany</div>
+      <ul class="tl-desc">
+        <li>Embedded systems, software architectures, machine learning, real-time programming.</li>
+        <li>AUTOSAR concepts and automotive development methodologies (ASPICE).</li>
+      </ul>
+      <span class="tl-badge">In Progress</span>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Jan 2016 — Feb 2020</div>
+      <div class="tl-title">BSc — Computer Science & Engineering</div>
+      <div class="tl-org">Eastern University · Dhaka, Bangladesh</div>
+      <ul class="tl-desc">
+        <li>GPA: 3.61 / 4.00 — graduated with distinction.</li>
+        <li>Leadership roles in Engineering Club and Computing Club.</li>
+      </ul>
+      <span class="tl-badge">GPA 3.61 / 4.00</span>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Apr 2019 — Sep 2020</div>
+      <div class="tl-title">Professional Training — Web Development</div>
+      <div class="tl-org">Creative IT Institute · Dhaka, Bangladesh</div>
+      <ul class="tl-desc">
+        <li>Full-stack: HTML5, CSS3, JavaScript, responsive design, CMS.</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">2013 — 2015</div>
+      <div class="tl-title">Higher Secondary Certificate (HSC)</div>
+      <div class="tl-org">Al-Amin Academy · Bangladesh</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEERING -->
+<section id="volunteering">
+  <div class="reveal">
+    <div class="section-label">Giving back</div>
+    <h2 class="section-title">Volunteering</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="vol-grid">
+    <div class="vol-card card-3d reveal">
+      <div class="vol-title">Co-Founder & General Secretary</div>
+      <div class="vol-org">Baitul Hikmah</div>
+      <div class="vol-period">Oct 2022 — Present · Bangladesh</div>
+      <div class="vol-desc">Co-founded a social and educational non-profit. Leads operations, community outreach, and event coordination.</div>
+    </div>
+    <div class="vol-card card-3d reveal">
+      <div class="vol-title">Founder</div>
+      <div class="vol-org">Pioneer of Light</div>
+      <div class="vol-period">Jul 2021 — Dec 2022 · Bangladesh</div>
+      <div class="vol-desc">Established a volunteer-driven organization focused on educational support and community empowerment.</div>
+    </div>
+    <div class="vol-card card-3d reveal">
+      <div class="vol-title">Volunteer</div>
+      <div class="vol-org">Shawon Blood Donation Society</div>
+      <div class="vol-period">May 2016 — Apr 2019 · Bangladesh</div>
+      <div class="vol-desc">Supported blood donation drives and public health awareness campaigns across the university community.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="reveal">
+    <div class="section-label">Communication</div>
+    <h2 class="section-title">Languages</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="lang-grid">
+    <div class="lang-item reveal">
+      <div class="lang-head">
+        <span class="lang-name">Bengali</span>
+        <span class="lang-level">Native</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:0" data-width="100%"></div></div>
+    </div>
+    <div class="lang-item reveal">
+      <div class="lang-head">
+        <span class="lang-name">English</span>
+        <span class="lang-level">Proficient · C1 / B2</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:0" data-width="82%"></div></div>
+      <div class="lang-note">Listening C1 · Reading B2 · Writing B2 · Speaking B2</div>
+    </div>
+    <div class="lang-item reveal">
+      <div class="lang-head">
+        <span class="lang-name">German</span>
+        <span class="lang-level">Basic · A2 / A1 · improving</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:0" data-width="22%"></div></div>
+      <div class="lang-note">Actively studying · Listening A2 · Reading A2</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">Let's talk</div>
+    <h2 class="section-title">Get in touch</h2>
+    <div class="section-rule"></div>
+  </div>
+  <p class="contact-sub reveal">
+    I'm actively looking for internship and working student opportunities in Germany.
+    If you think we could work together, I'd love to hear from you.
+  </p>
+  <div class="contact-links reveal">
+    <a href="mailto:redwanredu110@gmail.com" class="contact-link">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      redwanredu110@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/redwanislam/" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 17H6.5v-7H9v7zm-1.25-8a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zM18 17h-2.5v-3.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5V17H10v-7h2.5v1.1c.46-.68 1.22-1.1 2-1.1 1.66 0 3 1.34 3 3V17z"/></svg>
+      linkedin.com/in/redwanislam
+    </a>
+    <a href="tel:+4917674915521" class="contact-link">
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+      (+49) 17674915521
+    </a>
+  </div>
+  <a href="mailto:redwanredu110@gmail.com" class="contact-email-big reveal">
+    redwanredu110@gmail.com
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Redwan Islam · Chemnitz, Germany</span>
+  <span>MSc Automotive Software Engineering · TU Chemnitz</span>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+
+  // Typing animation
+  const nameEl = document.getElementById('hero-name');
+  if (nameEl) {
+    const fullName = 'Redwan Islam';
+    let i = 0;
+    const type = () => {
+      if (i <= fullName.length) {
+        nameEl.innerHTML = fullName.slice(0, i) + '<span class="cursor"></span>';
+        i++;
+        if (i <= fullName.length) setTimeout(type, i === 1 ? 600 : 80);
+      }
+    };
+    setTimeout(type, 400);
+  }
+
+  // Background circuit canvas
+  const canvas = document.getElementById('hero-canvas');
+  if (canvas && canvas.getContext) {
+    const ctx = canvas.getContext('2d');
+    let nodes = [];
+    const resize = () => {
+      canvas.width = canvas.offsetWidth || innerWidth;
+      canvas.height = canvas.offsetHeight || innerHeight;
+      const count = Math.min(110, Math.floor((canvas.width * canvas.height) / 18000));
+      nodes = Array.from({length: count}, () => ({
+        x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+        vx:(Math.random()-.5)*.3, vy:(Math.random()-.5)*.3, r:Math.random()*1.5+.5
+      }));
+    };
+    const draw = () => {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let a=0;a<nodes.length;a++) for(let b=a+1;b<nodes.length;b++) {
+        const dx=nodes[a].x-nodes[b].x, dy=nodes[a].y-nodes[b].y;
+        const d=Math.hypot(dx,dy);
+        if(d<130){
+          ctx.strokeStyle=`rgba(0,194,203,${(1-d/130)*.5})`;
+          ctx.lineWidth=.6; ctx.beginPath(); ctx.moveTo(nodes[a].x,nodes[a].y); ctx.lineTo(nodes[b].x,nodes[b].y); ctx.stroke();
+        }
+      }
+      nodes.forEach(n=>{
+        ctx.fillStyle='rgba(0,194,203,.7)'; ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
+        n.x+=n.vx; n.y+=n.vy;
+        if(n.x<0||n.x>canvas.width)n.vx*=-1; if(n.y<0||n.y>canvas.height)n.vy*=-1;
+      });
+      requestAnimationFrame(draw);
+    };
+    addEventListener('resize',resize); resize(); draw();
+  }
+
+  // Reveal animations
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => entries.forEach((e,idx)=>{
+      if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),idx*60); observer.unobserve(e.target); }
+    }), {threshold:.12});
+    revealEls.forEach(el=>observer.observe(el));
+  } else revealEls.forEach(el=>el.classList.add('visible'));
+
+  // Language bars
+  if ('IntersectionObserver' in window) {
+    const barObserver = new IntersectionObserver(entries=>entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.lang-fill').forEach(f=>f.style.width=f.dataset.width||'0');
+        barObserver.unobserve(e.target);
+      }
+    }),{threshold:.3});
+    document.querySelectorAll('.lang-item').forEach(el=>barObserver.observe(el));
+  } else document.querySelectorAll('.lang-fill').forEach(f=>f.style.width=f.dataset.width||'0');
+
+  // Mobile navigation
+  window.toggleNav = () => document.getElementById('navLinks')?.classList.toggle('open');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks')?.classList.remove('open')));
+
+  // Active navigation
+  const sections=document.querySelectorAll('section[id]'), navAs=document.querySelectorAll('.nav-links a');
+  addEventListener('scroll',()=>{
+    let cur=''; sections.forEach(s=>{if(scrollY>=s.offsetTop-140)cur=s.id;});
+    navAs.forEach(a=>a.style.color=a.getAttribute('href')==='#'+cur?'var(--cyan)':'');
+  },{passive:true});
+
+  // Scroll progress + back to top
+  const progress=document.getElementById('progress'), backTop=document.getElementById('backTop');
+  const updateScroll=()=>{
+    const max=document.documentElement.scrollHeight-innerHeight;
+    if(progress) progress.style.width=(max>0?(scrollY/max)*100:0)+'%';
+    if(backTop) backTop.classList.toggle('show',scrollY>500);
+  };
+  addEventListener('scroll',updateScroll,{passive:true}); updateScroll();
+  backTop?.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+  // 3D card tilt
+  if(!matchMedia('(pointer: coarse)').matches){
+    document.querySelectorAll('.card-3d').forEach(card=>{
+      card.addEventListener('pointermove',e=>{
+        const r=card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        card.style.transform=`perspective(800px) rotateX(${(-y*5).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateY(-3px)`;
+      });
+      card.addEventListener('pointerleave',()=>card.style.transform='');
+    });
+  }
+})();
+</script>
+</body>
+</html>
